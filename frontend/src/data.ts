@@ -6,7 +6,7 @@ export const foods: Food[] = [
       id: '1',
       name: 'Pizza',
       price: 10.99,
-      tags: ['FastFood', 'Pizza', 'Lunch'],
+      tags: ['FastFood', 'Pizza', 'Lunch', 'SlowFood'],
       favorite: true,
       stars: 4.5,
       imageUrl: 'assets/images/pizza.jpg',
