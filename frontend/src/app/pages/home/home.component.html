@@ -5,35 +5,37 @@
     resetLinkText="Reset Search"
 ></app-notfound>
 <ul>
-    <li *ngFor="let food of foods;">
-        <a routerLink="/food/{{ food.id }}">
-            <img [src]="food.imageUrl" [alt]="food.name" />
-        </a>
-            <div class="content">
-                <div class="name">
-                    {{ food.name }}
-                </div>
-                <button (click)="toggleFavorite(food)" class="favorite {{ food.favorite ? '' : 'not' }}">
-                    &#10084; 
-                </button>
-                <div class="product-item-footer">
-                    <div class="origins">
-                        <span *ngFor="let origin of food.origins">
-                            {{ origin }}
+    <ng-container *ngFor="let food of foods">
+        <li>
+            <a routerLink="/food/{{ food.id }}">
+                <img [src]="food.imageUrl" [alt]="food.name" />
+            </a>
+                <div class="content">
+                    <div class="name">
+                        {{ food.name }}
+                    </div>
+                    <button (click)="toggleFavorite(food)" class="favorite {{ food.favorite ? '' : 'not' }}">
+                        &#10084; 
+                    </button>
+                    <div class="product-item-footer">
+                        <div class="origins">
+                            <span *ngFor="let origin of food.origins">
+                                {{ origin }}
+                            </span>
+                        </div>
+    
+                        <div class="cook-time">
+                            <span>🕒</span>
+                            {{ food.cookTime }}
+                        </div>
+                    </div>
+    
+                    <div class="price">
+                        <span>
+                            {{ food.price | currency }}
                         </span>
                     </div>
-
-                    <div class="cook-time">
-                        <span>🕒</span>
-                        {{ food.cookTime }}
-                    </div>
                 </div>
-
-                <div class="price">
-                    <span>
-                        {{ food.price | currency }}
-                    </span>
-                </div>
-            </div>
-    </li>
+        </li>
+    </ng-container>
 </ul>
