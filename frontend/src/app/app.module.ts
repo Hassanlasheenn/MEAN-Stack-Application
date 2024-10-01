@@ -11,6 +11,10 @@ import { TagsComponent } from './components/tags/tags.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/title/title.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -23,12 +27,21 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     TagsComponent,
     CartPageComponent,
     TitleComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      newestOnTop: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -80,3 +80,22 @@ export const tags: any[] = [
   { name: 'Breakfast', count: 1 },
   { name: 'Healthy', count: 1 }
 ]
+
+export const users: any[] = [
+  {
+    name: 'Hassan',
+    lastName: 'Lasheen',
+    email: 'hassan.lashin@gmail.com',
+    password: '123456',
+    address: 'Cairo',
+    isAdmin: true
+  },
+  {
+    name: 'hussien',
+    lastName: 'Lasheen',
+    email: 'hussien.lasn@gmail.com',
+    password: '123468',
+    address: 'Alexandria',
+    isAdmin: false
+  },
+]

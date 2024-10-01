@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="container__details">
+        <app-title class="container__details__title" title="Login"></app-title>
+        <form class="container__form" [formGroup]="loginForm">
+            <div class="container__form__input-container">
+                <label>Email</label>
+                <div class="container__form__inputs">
+                    <input class="container__form__inputs__email" type="email" placeholder="Enter your Email" formControlName="email" [ngClass]="{'error': fc.email.errors && isSubmitted, 'valid': fc.email.valid}" />
+                </div>
+
+                <div class="error-list" *ngIf="fc.email.errors && isSubmitted">
+                    <div *ngIf="fc.email.errors.required">Field is required</div>
+                    <div *ngIf="fc.email.errors.email">Email is not correct</div>
+                    <div *ngIf="fc.email.errors.maxlength">Email should be less than 5</div>
+                </div>
+            </div>
+            <div class="container__form__input-container">
+                <label>Password</label>
+                <div class="container__form__inputs">
+                    <input class="container__form__inputs__password" type="password" placeholder="Enter your Password" formControlName="password" [ngClass]="{'error': fc.email.errors && isSubmitted, 'valid': fc.password.valid}" />
+                    <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
+                        <div *ngIf="fc.password.errors.required">Field is required</div>
+                    </div>
+                    <a href="#" class="container__form__inputs__password__forgot">Forgot your password?</a>
+                </div>
+            </div>
+            <div class="container__form__button">
+                <button class="container__form__button__login-btn" (click)="onSubmit()" type="submit">Login</button>
+            </div>
+            <div class="container__form__already_user">
+                Already a User? <a class="container__form__already_user-sign-up" href="#">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
