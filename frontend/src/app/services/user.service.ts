@@ -1,9 +1,10 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, take } from "rxjs";
+import { BehaviorSubject, catchError, Observable, take, throwError } from "rxjs";
 import { User } from "../shared/models/User";
 import { IUserLogin } from "../shared/interfaces/IUserLogin";
-import { USER_LOGIN_URL } from "../shared/constants/urls";
+import { USER_LOGIN_URL, USER_REGISTER_URL } from "../shared/constants/urls";
+import { IUserRegister } from "../shared/interfaces/IUserRegister";
 
 const USER_KEY = 'User';
 @Injectable({
@@ -48,4 +49,10 @@ export class UserService {
     isLoggedIn(): boolean {
         return !!this.getUserLocalStorage();
     }    
+
+    register(userRegister: IUserRegister): Observable<IUserRegister> {
+        return this._http
+        .post<IUserRegister>(USER_REGISTER_URL, userRegister)
+        .pipe(take(1));
+    }
 }

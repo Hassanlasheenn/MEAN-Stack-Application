@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 
 export const foods: any[] = [
     {
@@ -86,7 +87,7 @@ export const users: any[] = [
     name: 'Hassan',
     lastName: 'Lasheen',
     email: 'hassan.lashin@gmail.com',
-    password: '123456',
+    password: bcrypt.hashSync('123456', 10),
     address: 'Cairo',
     isAdmin: true
   },
@@ -94,8 +95,9 @@ export const users: any[] = [
     name: 'hussien',
     lastName: 'Lasheen',
     email: 'hussien.lasn@gmail.com',
-    password: '123468',
+    password: bcrypt.hashSync('123468', 10),
     address: 'Alexandria',
     isAdmin: false
   },
-]
+];
+

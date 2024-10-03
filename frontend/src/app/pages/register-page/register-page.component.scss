@@ -10,31 +10,24 @@
         justify-content: center;
         align-items: center;
         padding: 5rem;
-        margin: 4.7rem;
+        margin: 3.5rem;
         border: 1px solid #e72929;
         border-radius: 2rem;
         background-color: #ecc5c5;
         height: 100%;
         &__title {
-            margin-bottom: 3rem;
-        }
-
-        &__error {
-            color: white;
-            background-color: red;
-            padding: 1rem;
+            margin-bottom: 2rem;
         }
     }
 
     &__form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
         gap: 1rem;
         text-align: center;
 
         &__inputs {
-            position: relative;
             &__email, &__password {
                 padding: .7rem 2rem;
                 border-radius: 2rem;
@@ -53,17 +46,6 @@
                 }
             }
             &__password {
-                padding-right: 40px;
-            }
-            & > &__eye {
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                top: 10px;
-                right: 20px;
-                cursor: pointer;
-            }
-            &__password {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -80,7 +62,7 @@
 
         &__button {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 2rem;
             &__login-btn {
                 padding: .5rem 1.5rem;
                 border: none;
@@ -98,7 +80,7 @@
         &__already_user {
             font-size: 14px;
             margin-top: .5rem;
-            &-sign-up {
+            &-login {
                 &:hover {
                     text-decoration: underline;
                 }

@@ -1,6 +1,7 @@
 <div class="container">
     <div class="container__details">
         <app-title class="container__details__title" title="Login"></app-title>
+        <p *ngIf="errorMsg" class="container__details__error">{{ errorMsg }}</p>
         <form class="container__form" [formGroup]="loginForm">
             <div class="container__form__input-container">
                 <label>Email</label>
@@ -17,7 +18,11 @@
             <div class="container__form__input-container">
                 <label>Password</label>
                 <div class="container__form__inputs">
-                    <input class="container__form__inputs__password" type="password" placeholder="Enter your Password" formControlName="password" [ngClass]="{'error': fc.email.errors && isSubmitted, 'valid': fc.password.valid}" />
+                    <input class="container__form__inputs__password" [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your Password" formControlName="password" [ngClass]="{'error': fc.password.errors && isSubmitted, 'valid': fc.password.valid}" />
+                    <div class="container__form__inputs__eye" (click)="togglePasswordVisibility()">
+                        <img *ngIf="isPasswordVisible" src="../../../assets/icons/21032633001644650691.svg" alt="eye" />
+                        <img *ngIf="!isPasswordVisible" src="../../../assets/icons/21260910731571183076.svg" alt="eye-slash" />
+                    </div>
                     <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
                         <div *ngIf="fc.password.errors.required">Field is required</div>
                     </div>
@@ -28,7 +33,7 @@
                 <button class="container__form__button__login-btn" (click)="onSubmit()" type="submit">Login</button>
             </div>
             <div class="container__form__already_user">
-                Already a User? <a class="container__form__already_user-sign-up" href="#">Register</a>
+                New User? <a class="container__form__already_user-sign-up" routerLink="/register">Register</a>
             </div>
         </form>
     </div>

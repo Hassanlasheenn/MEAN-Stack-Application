@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { IUserLogin } from 'src/app/shared/interfaces/IUserLogin';
 import { User } from 'src/app/shared/models/User';
+
 
 @Component({
   selector: 'app-login-page',
@@ -17,6 +19,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   isSubmitted: boolean = false;
   returnUrl: string = '';
+  isPasswordVisible: boolean = false;
+  errorMsg: string = '';
 
   get fc() {
     return this.loginForm.controls;
@@ -48,7 +52,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  async login(): Promise<void> {
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  login(): void {
     const loginRequest: IUserLogin = {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
@@ -64,12 +72,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
             this._userService.setUserLocalStorage(res);
             this._router.navigateByUrl(this.returnUrl);
           } else {
-            this.toastr.error('Login failed. Please check your credentials.'); // Provide feedback on login failure
+            this.toastr.error('Login failed. Please check your credentials.');
           }
         },
-        error: (err: Error) => {
-          console.error(err);
-          this.toastr.error('Login failed. Please try again.'); // Provide feedback on login failure
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+          this.errorMsg = err?.error?.message;
         },
       });
   }
