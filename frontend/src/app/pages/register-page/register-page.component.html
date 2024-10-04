@@ -1,6 +1,7 @@
 <section class="container">
     <div class="container__details">
         <app-title class="container__details__title" title="Register"></app-title>
+        <p *ngIf="errorMsg" class="container__details__error">{{ errorMsg }}</p>
         <form class="container__form" [formGroup]="registerForm">
             <div class="container__form__input-container">
                 <label>Name</label>

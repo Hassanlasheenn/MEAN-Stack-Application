@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   registerForm!: FormGroup;
   isSubmitted: boolean = false;
+  errorMsg: string = '';
 
   get fc() {
     return this.registerForm.controls;
@@ -62,7 +64,12 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
           console.log(res);
           this._router.navigate(['/login']);
         },
-        error: (err: Error) => console.error(err?.message),
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+          if(err?.status === 409) {
+            this.errorMsg = err?.error?.message;
+          }
+        },
       })
     }
   }

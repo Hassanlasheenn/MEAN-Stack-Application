@@ -18,6 +18,12 @@
         &__title {
             margin-bottom: 2rem;
         }
+
+        &__error {
+            color: white;
+            background-color: red;
+            padding: 1rem;
+        }
     }
 
     &__form {
