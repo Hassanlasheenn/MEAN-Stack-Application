@@ -11,7 +11,7 @@ export const userRegister = asyncHandler(
         const currUsers = await UserModel.findOne({ email });
 
         if(currUsers) {
-            res.status(400).send("User already exists");
+            res.status(409).send({ message: "User already exists" });
             return;
         }
 
