@@ -1,4 +1,4 @@
-<div class="container">
+<section class="container">
     <div class="container__details">
         <app-title class="container__details__title" title="Login"></app-title>
         <p *ngIf="errorMsg" class="container__details__error">{{ errorMsg }}</p>
@@ -26,7 +26,7 @@
                     <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
                         <div *ngIf="fc.password.errors.required">Field is required</div>
                     </div>
-                    <a href="#" class="container__form__inputs__password__forgot">Forgot your password?</a>
+                    <a routerLink="/reset" class="container__form__inputs__password__forgot">Forgot your password?</a>
                 </div>
             </div>
             <div class="container__form__button">
@@ -37,4 +37,4 @@
             </div>
         </form>
     </div>
-</div>
+</section>

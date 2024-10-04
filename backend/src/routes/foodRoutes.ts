@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getFoods, searchFoods, getFoodById, getTags, getTagsByName } from "../controllers/foodController";
 
+
 const router = Router();
 
 router.get('/', getFoods);

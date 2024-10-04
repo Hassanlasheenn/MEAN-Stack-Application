@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     NotfoundComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

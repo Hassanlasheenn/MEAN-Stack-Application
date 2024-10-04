@@ -2,6 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import foodRoutes from './routes/foodRoutes';
 import userRoutes from './routes/userRoutes';
+import dotenv from 'dotenv';
+import { dbConnect } from './configs/database.config';
+
+dotenv.config();
+dbConnect();
 
 const app = express();
 const port = process.env.PORT || 8080;
