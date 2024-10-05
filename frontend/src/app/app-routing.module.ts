@@ -10,6 +10,11 @@ import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'login',
     component: LoginPageComponent,
   },
@@ -20,11 +25,6 @@ const routes: Routes = [
   {
     path: 'reset',
     component: ResetPasswordComponent
-  },
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'search/:searchTerm',

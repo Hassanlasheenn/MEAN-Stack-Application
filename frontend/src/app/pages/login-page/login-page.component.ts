@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private toastr: ToastrService // Inject ToastrService for notifications
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +40,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this._userService.isLoggedIn()) {
       this._router.navigateByUrl('/home');
     } else {
-      // Set returnUrl only if the user is not logged in
       this.returnUrl = this._activatedRoute.snapshot.queryParams.returnUrl || '/login';
     }
   }
@@ -67,12 +66,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy$))
       .subscribe({
         next: (res: User) => {
+          if(!res) return;
           if (res) {
             this._userService.setUser = res;
             this._userService.setUserLocalStorage(res);
-            this._router.navigateByUrl(this.returnUrl);
-          } else {
-            this.toastr.error('Login failed. Please check your credentials.');
+            this.toastr.success("User Logged Successfully", 'Success');
+            setTimeout(() => {
+              this._router.navigateByUrl(this.returnUrl);
+            }, 1000);
           }
         },
         error: (err: HttpErrorResponse) => {

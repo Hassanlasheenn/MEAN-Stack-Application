@@ -44,7 +44,6 @@ import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-      newestOnTop: true,
     }),
   ],
   providers: [],
