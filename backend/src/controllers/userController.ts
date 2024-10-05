@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import asyncHandler from 'express-async-handler';
 import { UserModel } from "../models/user.model";
+import { HttpStatusCodes } from '../enums/http_status_codes.enum';
 
 
 export const userRegister = asyncHandler(
@@ -11,7 +12,7 @@ export const userRegister = asyncHandler(
         const currUsers = await UserModel.findOne({ email });
 
         if(currUsers) {
-            res.status(409).send({ message: "User already exists" });
+            res.status(HttpStatusCodes.HTTP_ALREADY_EXISTED).send({ message: "User already exists" });
             return;
         }
 
@@ -27,14 +28,14 @@ export const userRegister = asyncHandler(
         });
 
         if(newUser) {
-            res.status(201).json({
+            res.status(HttpStatusCodes.CREATED).json({
                 message: 'User registered successfully',
                 user: newUser,
             });
 
             console.log(res);
         } else {
-            res.status(400).send("Error registering user");
+            res.status(HttpStatusCodes.HTTP_BAD_REQUEST).send("Error registering user");
             console.log(res);
         }
     }
@@ -46,12 +47,12 @@ export const userLogin = asyncHandler(
         const convertedEmail = email.toLowerCase();
         const user = await UserModel.findOne({ email: convertedEmail });
         if (!user) {
-            res.status(401).json({ message: "Email or password is not valid!" });
+            res.status(HttpStatusCodes.HTTP_NOT_AUTHORIZED).json({ message: "Email or password is not valid!" });
         }
     
         const isPasswordValid = await bcrypt.compare(password, user!.password);
         if (!isPasswordValid) {
-            res.status(401).json({ message: "Email or password is not valid!" });
+            res.status(HttpStatusCodes.HTTP_NOT_AUTHORIZED).json({ message: "Email or password is not valid!" });
         }
     
         const { password: _, ...userWithoutPassword } = user!.toObject();
