@@ -50,19 +50,36 @@
             <div class="container__form__input-container">
                 <label>Password</label>
                 <div class="container__form__inputs">
-                    <input class="container__form__inputs__password" type="password" placeholder="Enter your Password" formControlName="password" [ngClass]="{'error': fc.password.errors && isSubmitted, 'valid': fc.password.valid}" />
-                    <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
-                        <div *ngIf="fc.password.errors.required">Field is required</div>
-                    </div>
+                  <input class="container__form__inputs__password" 
+                         [type]="isPasswordVisible ? 'text' : 'password'" 
+                         placeholder="Enter your Password" 
+                         formControlName="password" 
+                         [ngClass]="{'error': fc.password.errors && isSubmitted, 'valid': fc.password.valid}" />
+                  <div class="container__form__inputs__eye" (click)="togglePasswordVisibility('password')">
+                    <img *ngIf="isPasswordVisible" src="../../../assets/icons/21032633001644650691.svg" alt="eye" />
+                    <img *ngIf="!isPasswordVisible" src="../../../assets/icons/21260910731571183076.svg" alt="eye-slash" />
+                  </div>
+                  <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
+                    <div *ngIf="fc.password.errors.required">Field is required</div>
+                  </div>
                 </div>
-            </div>
-            <div class="container__form__input-container">
+              </div>
+              
+              <div class="container__form__input-container">
                 <label>Confirm Password</label>
                 <div class="container__form__inputs">
-                    <input class="container__form__inputs__password" type="password" placeholder="Confirm your Password" formControlName="confirmPassword" [ngClass]="{'error': fc.confirmPassword.errors && isSubmitted, 'valid': fc.confirmPassword.valid}" />
-                    <div class="error-list" *ngIf="fc.confirmPassword.errors && isSubmitted">
-                        <div *ngIf="fc.confirmPassword.errors.required">Field is required</div>
-                    </div>
+                  <input class="container__form__inputs__password" 
+                         [type]="isConfirmPasswordVisible ? 'text' : 'password'" 
+                         placeholder="Confirm your Password" 
+                         formControlName="confirmPassword" 
+                         [ngClass]="{'error': fc.confirmPassword.errors && isSubmitted, 'valid': fc.confirmPassword.valid}" />
+                  <div class="container__form__inputs__eye" (click)="togglePasswordVisibility('confirmPassword')">
+                    <img *ngIf="isConfirmPasswordVisible" src="../../../assets/icons/21032633001644650691.svg" alt="eye" />
+                    <img *ngIf="!isConfirmPasswordVisible" src="../../../assets/icons/21260910731571183076.svg" alt="eye-slash" />
+                  </div>
+                  <div class="error-list" *ngIf="fc.confirmPassword.errors && isSubmitted">
+                    <div *ngIf="fc.confirmPassword.errors.required">Field is required</div>
+                  </div>
                 </div>
             </div>
         </form>

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { IUserRegister } from 'src/app/shared/interfaces/IUserRegister';
@@ -16,6 +17,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   isSubmitted: boolean = false;
   errorMsg: string = '';
+  isPasswordVisible: boolean = false;
+  isConfirmPasswordVisible: boolean = false;
 
   get fc() {
     return this.registerForm.controls;
@@ -25,6 +28,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _userService: UserService,
     private _router: Router,
+    private _toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,35 +46,50 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     })
   }
 
+  togglePasswordVisibility(field: 'password' | 'confirmPassword'): void {
+    if (field === 'password') {
+      this.isPasswordVisible = !this.isPasswordVisible;
+    } else if (field === 'confirmPassword') {
+      this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
+    }
+  }
+
   onSubmit(): void {
     const { name, lastName, address, email, password, confirmPassword } = this.registerForm?.value;
     if(this.registerForm?.invalid) {
       this.isSubmitted = true;
-    } else if(this.registerForm?.valid && confirmPassword === password) {
-      const registerPayload: IUserRegister = {
-        name: name,
-        lastName: lastName,
-        address: address,
-        email: email,
-        password: password
+    } else if(this.registerForm?.valid) {
+      if(confirmPassword !== password) {
+        this.errorMsg = "Passwords should match";
+        return;
+      } else {
+        const registerPayload: IUserRegister = {
+          name: name,
+          lastName: lastName,
+          address: address,
+          email: email,
+          password: password
+        }
+        this.isSubmitted = false;
+        this._userService
+        .register(registerPayload)
+        .pipe(takeUntil(this._destroy$))
+        .subscribe({
+          next: (res: IUserRegister) => {
+            if(!res) return;
+            this._toastr.success('Registration successful!', 'Success');
+            setTimeout(() => {
+              this._router.navigate(['/login']);
+            }, 1000);
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log(err);
+            if(err?.status === 409) {
+              this.errorMsg = err?.error?.message;
+            }
+          },
+        });
       }
-      this.isSubmitted = false;
-      this._userService
-      .register(registerPayload)
-      .pipe(takeUntil(this._destroy$))
-      .subscribe({
-        next: (res: IUserRegister) => {
-          if(!res) return;
-          console.log(res);
-          this._router.navigate(['/login']);
-        },
-        error: (err: HttpErrorResponse) => {
-          console.log(err);
-          if(err?.status === 409) {
-            this.errorMsg = err?.error?.message;
-          }
-        },
-      })
     }
   }
 
