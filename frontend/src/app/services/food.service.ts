@@ -8,7 +8,7 @@ import {
   FOODS_BY_TAG_URL, 
   FOODS_TAGS_URL, 
   FOODS_URL 
-} from '../shared/constants/urls';
+} from '../shared/constants/api-urls';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, Observable, take, throwError } from "rxjs";
 import { User } from "../shared/models/User";
 import { IUserLogin } from "../shared/interfaces/IUserLogin";
-import { USER_LOGIN_URL, USER_REGISTER_URL } from "../shared/constants/urls";
+import { USER_LOGIN_URL, USER_REGISTER_URL } from "../shared/constants/api-urls";
 import { IUserRegister } from "../shared/interfaces/IUserRegister";
 
 const USER_KEY = 'User';
