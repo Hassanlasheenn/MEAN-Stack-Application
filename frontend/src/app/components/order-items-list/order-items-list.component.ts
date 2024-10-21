@@ -7,5 +7,17 @@ import { Order } from 'src/app/shared/models/Order';
   styleUrls: ['./order-items-list.component.scss']
 })
 export class OrderItemsListComponent {
-  @Input() order!: Order
+  @Input() order!: Order;
+
+  constructor() {}
+
+
+  /**
+   * @description method to remove item from the checkout page
+   * @param {string} itemId 
+   * @return {void} void
+   */
+  removeItem(itemId: string): void {
+    this.order.items = this.order.items.filter((item) => item.food.id !== itemId);
+  }
 }

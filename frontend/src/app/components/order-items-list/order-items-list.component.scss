@@ -25,3 +25,16 @@ td img {
     object-fit: contain;
     border-radius: 100rem;
 }
+
+.remove-item {
+    border-radius: 1rem;
+    border: none;
+    padding: .5rem;
+    color: #e72929;
+    opacity: .7;
+    outline: none;
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
