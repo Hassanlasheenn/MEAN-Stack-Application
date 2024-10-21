@@ -40,14 +40,11 @@ export class CheckoutPageComponent implements OnInit {
 
   createOrder(): void {
     if(this.checkoutForm?.invalid) {
-      console.log('form is invalid');
       return;
     }
     
     this.order.name = this.fc.name.value;
     this.order.address = this.fc.address.value;
-
-    console.log(this.order);
   }
 
   
