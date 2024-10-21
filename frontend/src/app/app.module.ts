@@ -24,6 +24,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { InputContainerComponent } from './components/input-container/input-container.component';
 import { InputValidationComponent } from './components/input-validation/input-validation.component';
 import { OrderItemsListComponent } from './components/order-items-list/order-items-list.component';
+import { MapComponent } from './components/map/map.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { OrderItemsListComponent } from './components/order-items-list/order-ite
     InputContainerComponent,
     InputValidationComponent,
     OrderItemsListComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
