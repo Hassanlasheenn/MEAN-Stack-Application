@@ -7,6 +7,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutPageComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -19,6 +19,11 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
+import { InputContainerComponent } from './components/input-container/input-container.component';
+import { InputValidationComponent } from './components/input-validation/input-validation.component';
+import { OrderItemsListComponent } from './components/order-items-list/order-items-list.component';
 
 
 @NgModule({
@@ -36,6 +41,11 @@ import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
     RegisterPageComponent,
     ResetPasswordComponent,
     LoadingComponent,
+    CheckoutPageComponent,
+    TextInputComponent,
+    InputContainerComponent,
+    InputValidationComponent,
+    OrderItemsListComponent,
   ],
   imports: [
     BrowserModule,

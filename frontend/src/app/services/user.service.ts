@@ -21,6 +21,10 @@ export class UserService {
         return this.userSubject.asObservable();
     }
 
+    get currentUser(): User {
+        return this.userSubject.value;
+    }
+
     private getUserLocalStorage(): User {
         const userJson = localStorage.getItem(USER_KEY);
         if(userJson) return JSON.parse(userJson) as User;
