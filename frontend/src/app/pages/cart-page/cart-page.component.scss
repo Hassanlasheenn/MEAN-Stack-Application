@@ -139,3 +139,19 @@ li .remove-button {
         color: grey;
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Change to column layout on small screens */
+        align-items: center; /* Center items */
+    }
+
+    ul {
+        width: 100%; /* Full width for the list */
+    }
+
+    .checkout {
+        width: 100%; /* Full width for the checkout section */
+        margin-top: 1rem; /* Add some space between the list and checkout */
+    }
+}
