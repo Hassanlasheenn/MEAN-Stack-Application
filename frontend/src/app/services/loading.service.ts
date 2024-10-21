@@ -5,7 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoadingService {
-  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  private isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private pendingRequests: number = 0;
 
   get isLoading(): Observable<boolean> {
     return this.isLoadingSubject.asObservable();
@@ -13,11 +14,23 @@ export class LoadingService {
 
   constructor() { }
 
-  private showLoading() {
-    this.isLoadingSubject.next(true);
+  /**
+   * @description method to show the loading spinner when pending requets property is more than 0
+   * @returns {void} void
+   */
+  showLoading(): void {
+    this.pendingRequests++;
+    this.isLoadingSubject.next(this.pendingRequests > 0);
   }
 
-  private hideLoading() {
-    this.isLoadingSubject.next(false);
+/**
+ * @description method to not show the loading spinner by checking on the pending requests less than 0
+ * @return {void} void
+ */
+  hideLoading(): void {
+    if(this.pendingRequests > 0) {
+      this.pendingRequests--;
+    }
+    this.isLoadingSubject.next(this.pendingRequests > 0);
   }
 }
