@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.
     LoginPageComponent,
     RegisterPageComponent,
     ResetPasswordComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
