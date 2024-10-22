@@ -8,10 +8,14 @@ div {
     height: 15rem;
 }
 
+.message {
+    color: var(--primary-text-color);
+}
+
 a {
     font-size: 1.1rem;
     background-color: #e72929;
-    color: white;
+    color: var(--primary-text-color);
     border-radius: 10rem;
     padding: .7rem 1rem;
     margin: 1rem;

@@ -1,0 +1,11 @@
+<div class="container">
+    <input type="checkbox" id="darkmode-toggle" (change)="toggleTheme($event)" />
+    <label for="darkmode-toggle">
+        <div>
+            <img class="sun" [src]="sunIcon" alt="moon icon">
+        </div>
+        <div>
+            <img class="moon" [src]="moonIcon" alt="moon icon">
+        </div>
+    </label>
+</div>

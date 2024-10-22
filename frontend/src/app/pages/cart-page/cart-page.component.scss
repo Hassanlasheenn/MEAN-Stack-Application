@@ -4,6 +4,14 @@
     align-items: flex-start;
     margin: 1.5rem;
     margin-top: .5rem;
+
+    &__food-name {
+        color: var(--primary-text-color);
+    }
+
+    &__food-price {
+        color: var(--primary-text-color);
+    }
 }
 
 ul {
@@ -43,6 +51,10 @@ li div {
 
 li div:not(first-child) {
     flex-basis: 18%;
+}
+
+select {
+    border-radius: .5rem;
 }
 
 li select {
@@ -92,7 +104,7 @@ li .remove-button {
 
     & a {
         padding: 1rem;
-        color: white;
+        color: var(--primary-text-color);
         background: #e72929;
         display: block;
         width: 99%;
@@ -109,17 +121,21 @@ li .remove-button {
 }
 
 .foods-count {
+    color: var(--primary-text-color);
     margin-bottom: 1.5rem;
 
     &::before {
         content: "Count: ";
-        color: grey;
+        color: var(--primary-text-color);
     }
 }
 
-.total-price::before {
-    content: "Price: ";
-    color: grey;
+.total-price {
+    color: var(--primary-text-color);
+    &::before {
+        content: "Price: ";
+        color: var(--primary-text-color);
+    }
 }
 
 
@@ -136,7 +152,7 @@ li .remove-button {
         opacity: .9;
         text-decoration: underline;
         cursor: pointer;
-        color: grey;
+        color: var(--primary-text-color);
     }
 }
 

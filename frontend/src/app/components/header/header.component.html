@@ -6,6 +6,7 @@
                 <li *ngIf="!isAuth">
                     <a routerLink="/login">Login</a>
                 </li>
+                <theme-toggle></theme-toggle>
                 <li *ngIf="isAuth" class="menu-container">
                     <a routerLink="/dashboard">{{ userName }}</a>
                     <div class="menu cursor-pointer">
@@ -14,7 +15,7 @@
                         <a routerLink="/login" (click)="onLogout()">Logout</a>
                     </div>
                 </li>
-                <li>
+                <li *ngIf="isAuth">
                     <a href="/cart">Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span></a>
                 </li>
             </ul>

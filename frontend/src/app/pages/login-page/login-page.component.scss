@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(0, 34%, 49%);
+    background-color: var(--primary-login-bg-color);
     height: 94.5vh;
     &__details {
         display: flex;
@@ -13,7 +13,7 @@
         margin: 0;
         border: 1px solid #e72929;
         border-radius: 2rem;
-        background-color: #ecc5c5;
+        background-color: var(--primary-login-bg-form);
         max-width: 90%;
         box-sizing: border-box;
         &__title {
@@ -21,7 +21,7 @@
         }
 
         &__error {
-            color: white;
+            color: var(--primary-text-color);
             background-color: red;
             padding: 1rem;
         }

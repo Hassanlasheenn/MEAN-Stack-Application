@@ -1,4 +1,6 @@
 <div *ngIf="isVisible">
-    {{ notFoundMessage }}
+    <p class="message">
+        {{ notFoundMessage }}
+    </p>
     <a [routerLink]="resetLinkRoute">{{ resetLinkText }}</a>
 </div>

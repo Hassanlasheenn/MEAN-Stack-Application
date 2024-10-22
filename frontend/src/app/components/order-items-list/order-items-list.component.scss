@@ -8,7 +8,7 @@ table {
 h3 {
     margin-top: .5rem;
     margin-left: .3rem;
-    color: grey;
+    color: var(--primary-text-color);
 }
 
 a:hover {
@@ -17,6 +17,7 @@ a:hover {
 
 td {
     height: 3rem;
+    color: var(--primary-text-color);
 }
 
 td img {

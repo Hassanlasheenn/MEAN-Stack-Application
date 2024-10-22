@@ -1,6 +1,6 @@
 header {
     position: relative;
-    background-color: white;
+    background-color: var(--primary-bg-color);
     padding: 0;
     border-bottom: 1px solid #e72929;
 }
@@ -9,7 +9,7 @@ a {
     color: #af1313;
     &:hover {
         background-color: #e72929;
-        color: white;
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 }
@@ -38,7 +38,7 @@ ul a {
 
 a span {
     background: #ff4d3d;
-    color: white;
+    color: var(--primary-text-color);
     padding: 0.1rem 0.45rem;
     border-radius: 100rem;
     font-size: 0.9rem;
@@ -51,7 +51,7 @@ a span {
 .menu {
     position: absolute;
     z-index: 1;
-    background: whitesmoke;
+    background: var(--primary-bg-color);
     display: none;
 }
 

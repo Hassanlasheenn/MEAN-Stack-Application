@@ -13,6 +13,22 @@ html, body {
     overflow: auto;
 }
 
+body {
+    --primary-bg-color: #fff;
+    --primary-text-color: #000;
+    --primary-bg-img: transparent;
+    --primary-login-bg-color: hsl(0, 34%, 49%);
+    --primary-login-bg-form: #ecc5c5;
+    &.dark-mode {
+        background-color: #161a1e;
+        --primary-bg-color: #161a1e;
+        --primary-text-color: #FFD369;
+        --primary-bg-img: transparent;
+        --primary-login-bg-color: #111a27;
+        --primary-login-bg-form: #615757;
+    }
+}
+
 html {
     font-size: 16px;
 }

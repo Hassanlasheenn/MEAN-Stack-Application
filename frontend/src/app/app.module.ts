@@ -25,6 +25,7 @@ import { InputContainerComponent } from './components/input-container/input-cont
 import { InputValidationComponent } from './components/input-validation/input-validation.component';
 import { OrderItemsListComponent } from './components/order-items-list/order-items-list.component';
 import { MapComponent } from './components/map/map.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MapComponent } from './components/map/map.component';
     InputValidationComponent,
     OrderItemsListComponent,
     MapComponent,
+    ThemeToggleComponent,
   ],
   imports: [
     BrowserModule,
