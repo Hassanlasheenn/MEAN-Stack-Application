@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/shared/models/cartItem';
 import { Order } from 'src/app/shared/models/Order';
 
 @Component({
@@ -9,7 +11,9 @@ import { Order } from 'src/app/shared/models/Order';
 export class OrderItemsListComponent {
   @Input() order!: Order;
 
-  constructor() {}
+  constructor(
+    private _cartService: CartService,
+  ) {}
 
 
   /**
@@ -17,7 +21,9 @@ export class OrderItemsListComponent {
    * @param {string} itemId 
    * @return {void} void
    */
-  removeItem(itemId: string): void {
-    this.order.items = this.order.items.filter((item) => item.food.id !== itemId);
+  removeItem(item: CartItem): void {
+    this.order.items = this.order.items.filter((orderItem: CartItem) => orderItem.food.id !== item.food.id);
+    this._cartService.removeFromCart(item?.food?.id);
+    this.order.totalPrice = this.order.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   }
 }
