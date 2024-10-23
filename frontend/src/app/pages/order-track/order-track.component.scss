@@ -1,0 +1,37 @@
+.container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 35rem;
+    margin-right: 1rem;
+    color: var(--primary-text-color);
+
+    & > h1 {
+        background-color: green;
+        padding: 1rem;
+        color: black;
+        text-align: center;
+    }
+}
+
+.details {
+    margin-bottom: 1rem;
+}
+
+.details > div {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--primary-info-color);
+}
+
+.details strong {
+    display: inline-block;
+    width: 20%;
+}

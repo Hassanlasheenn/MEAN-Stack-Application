@@ -9,6 +9,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { OrderTrackComponent } from './pages/order-track/order-track.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
   {
     path: 'payment',
     component: PaymentPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'track/:orderId',
+    component: OrderTrackComponent,
     canActivate: [AuthGuard],
   },
   {

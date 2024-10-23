@@ -41,6 +41,22 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  //todo: to enhance this order status
+  goToOrderPage(): void {
+    const orderId = localStorage.getItem('orderId');
+    const expirationTime = localStorage.getItem('orderIdExpiration');
+    if(orderId && expirationTime) {
+      const currentTime = Date.now();
+      if(currentTime < parseInt(expirationTime, 10)) {
+        this._router.navigateByUrl(`/track/${orderId}`);
+      } else {
+        console.log('the order status is now delivered');
+      }
+    } else {
+      console.log('no order id found');
+    }
+  }
+
   onLogout(): void {
     this._userService.logout();
     this._router.navigate(['/login']);

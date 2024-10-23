@@ -11,7 +11,7 @@
                     <a routerLink="/dashboard">{{ userName }}</a>
                     <div class="menu cursor-pointer">
                         <a routerLink="/profile">Profile</a>
-                        <a routerLink="/orders">Orders</a>
+                        <a (click)="goToOrderPage()">Orders</a>
                         <a routerLink="/login" (click)="onLogout()">Logout</a>
                     </div>
                 </li>

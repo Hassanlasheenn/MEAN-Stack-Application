@@ -1,0 +1,19 @@
+<div class="container">
+    <ng-container *ngIf="order">
+        <div class="content">
+            <h1>Order is placed successfully</h1>
+            <div class="details">
+                <div><strong>OrderId</strong> #{{ order.id }}</div>
+                <div><strong>Date</strong> {{ order.createdAt | date: 'medium' }}</div>
+                <div><strong>Name</strong> {{ order.name }}</div>
+                <div><strong>Address</strong> {{ order.address }}</div>
+                <div><strong>Status</strong> {{ order.status }}</div>
+                <ng-container *ngIf="order.paymentId">
+                    <div><strong>Payment Id</strong> {{ order.paymentId }}</div>
+                </ng-container>
+            </div>
+
+            <order-items-list [isOrdered]="true" [order]="order"></order-items-list>
+        </div>
+    </ng-container>
+</div>

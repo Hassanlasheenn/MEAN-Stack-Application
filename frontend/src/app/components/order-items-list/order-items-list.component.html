@@ -24,11 +24,13 @@
                 {{ item.price | currency }}
             </td>
         </tr>
-        <div>
-            <button class="remove-item" (click)="removeItem(item)">
-                Remove
-            </button>
-        </div>
+        <ng-container *ngIf="!isOrdered">
+            <div>
+                <button class="remove-item" (click)="removeItem(item)">
+                    Remove
+                </button>
+            </div>
+        </ng-container>
     </ng-container>
     <tr>
         <td colspan="3"></td>

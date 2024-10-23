@@ -5,6 +5,7 @@ import { OrderModel } from '../models/order.model';
 import { OrderStatus } from '../enums/order_status.enum';
 import auth from '../middlewares/auth.mid';
 import { createOrder, getOrder } from '../controllers/orderController';
+import mongoose from 'mongoose';
 
 const router = Router();
 router.use(auth);
@@ -25,6 +26,24 @@ router.post('/pay', asyncHandler(
         await order.save();
 
         res.send(order._id);
+    }
+));
+
+router.get('/track/:orderId', asyncHandler(
+    async (req: any, res: any) => {
+        const { orderId } = req.params;
+
+        if(!mongoose.Types.ObjectId.isValid(orderId)) {
+            return res.status(HttpStatusCodes.HTTP_BAD_REQUEST).json({ message: 'Invalid Order Id' });
+        }
+
+        const order = await OrderModel.findById(orderId);
+
+        if(!order) {
+            return res.status(HttpStatusCodes.NOT_FOUND).json({ mesage: 'Order not found' });
+        }
+
+        return res.json(order);
     }
 ));
 

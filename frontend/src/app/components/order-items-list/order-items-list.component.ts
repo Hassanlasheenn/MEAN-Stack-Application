@@ -10,6 +10,7 @@ import { Order } from 'src/app/shared/models/Order';
 })
 export class OrderItemsListComponent {
   @Input() order!: Order;
+  @Input() isOrdered!: boolean;
 
   constructor(
     private _cartService: CartService,

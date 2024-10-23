@@ -29,6 +29,7 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
+import { OrderTrackComponent } from './pages/order-track/order-track.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { PaypalButtonComponent } from './components/paypal-button/paypal-button.
     ThemeToggleComponent,
     PaymentPageComponent,
     PaypalButtonComponent,
+    OrderTrackComponent,
   ],
   imports: [
     BrowserModule,
