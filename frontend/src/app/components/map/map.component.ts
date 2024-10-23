@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
 import { icon, LatLng, LatLngExpression, LatLngTuple, LeafletMouseEvent, map, Map, marker, Marker, tileLayer } from 'leaflet';
 import { Subject, takeUntil } from 'rxjs';
 import { LocationService } from 'src/app/services/location.service';
@@ -9,8 +9,9 @@ import { Order } from 'src/app/shared/models/Order';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnChanges, OnDestroy {
   @Input() order!: Order;
+  @Input() readonly: boolean = false;
   private _destroy$ = new Subject<void>();
   private readonly DEFAULT_LATLNG: LatLngTuple = [30.093923, 31.3338075];
   private readonly MARKER_ZOOM_LEVEL= 16;
@@ -29,17 +30,42 @@ export class MapComponent implements OnInit, OnDestroy {
 
   set addressLatLng(latlng: LatLng) {
     //this is for the mongodb as it does not accept a float number with more than 8 floating points
+    if(!latlng.lat.toFixed) return;
     latlng.lat = parseFloat(latlng.lat.toFixed(8));
     latlng.lng = parseFloat(latlng.lng.toFixed(8));
     this.order.addressLatLng = latlng;
+  }
+
+  get addressLatLng(): LatLng {
+    return this.order.addressLatLng!;
   }
 
   constructor(
     private _locationService: LocationService,
   ){}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    if(!this.order) return;
     this.initializeMap();
+
+    if(this.readonly && this.addressLatLng) {
+      this.showLocationOnReadOnly();
+    }
+  }
+
+  showLocationOnReadOnly() {
+    const map = this.map;
+    this.setMarker(this.addressLatLng);
+    map.setView(this.addressLatLng, this.MARKER_ZOOM_LEVEL);
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+    map.off('click');
+    map.tapHold?.disable();
+    this.currentMarker.dragging?.disable();
   }
 
   initializeMap(): void {

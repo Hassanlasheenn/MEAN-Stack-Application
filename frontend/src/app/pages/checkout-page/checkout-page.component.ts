@@ -65,7 +65,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     .subscribe({
       next: () => {
         this._toastrService.success('Order is created successfully');
-        // this._router.navigateByUrl('/payment');
+        this._router.navigateByUrl('/payment');
       },
       error: (err) => {
         this._toastrService.error(err.error, 'Cart');

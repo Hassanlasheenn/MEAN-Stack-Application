@@ -22,4 +22,8 @@ export class OrderService {
         
         return newOrder;
     }
+
+    async getNewOrder() {
+        
+    }
 }

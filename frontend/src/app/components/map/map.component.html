@@ -1,6 +1,8 @@
 <div class="container">
-    <div class="find-location" (click)="findMyLocation()">
-        <img [src]="locationIcon" alt="icon" />
-    </div>
+    <ng-container *ngIf="!readonly">
+        <div class="find-location" (click)="findMyLocation()">
+            <img [src]="locationIcon" alt="icon" />
+        </div>
+    </ng-container>
     <div #map class="map"></div>
 </div>

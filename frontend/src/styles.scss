@@ -19,6 +19,7 @@ body {
     --primary-bg-img: transparent;
     --primary-login-bg-color: hsl(0, 34%, 49%);
     --primary-login-bg-form: #ecc5c5;
+    --primary-info-color: #af1313;
     &.dark-mode {
         background-color: #161a1e;
         --primary-bg-color: #161a1e;
@@ -26,6 +27,7 @@ body {
         --primary-bg-img: transparent;
         --primary-login-bg-color: #111a27;
         --primary-login-bg-form: #615757;
+        --primary-info-color: #af1313;
     }
 }
 

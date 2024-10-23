@@ -27,6 +27,8 @@ import { OrderItemsListComponent } from './components/order-items-list/order-ite
 import { MapComponent } from './components/map/map.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     OrderItemsListComponent,
     MapComponent,
     ThemeToggleComponent,
+    PaymentPageComponent,
+    PaypalButtonComponent,
   ],
   imports: [
     BrowserModule,
