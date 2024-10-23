@@ -4,6 +4,9 @@ import bcrypt from 'bcrypt';
 import asyncHandler from 'express-async-handler';
 import { UserModel } from "../models/user.model";
 import { HttpStatusCodes } from '../enums/http_status_codes.enum';
+import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
 
 
 export const userRegister = asyncHandler(
@@ -62,13 +65,32 @@ export const userLogin = asyncHandler(
 
 
 const generateTokenResponse = (user: any) => {
+    const dynamicSecret = crypto.randomBytes(32).toString('hex');
+    const envPath = path.resolve(__dirname, '../.env');
+    const updateEnvFile = (key: string, value: string) => {
+        let envContent = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf8') : '';
+
+        const keyRegex = new RegExp(`^${key}=.*`, 'm');
+
+        if (keyRegex.test(envContent)) {
+            envContent = envContent.replace(keyRegex, `${key}=${value}`);
+        } else {
+            envContent += `\n${key}=${value}\n`;
+        }
+
+        fs.writeFileSync(envPath, envContent);
+    };
+
+    updateEnvFile('JWT_SECRET', dynamicSecret);
+    require('dotenv').config({ path: envPath });
     const token = jwt.sign({
+        id: user.id,
         email: user.email, 
         isAdmin: user.isAdmin
-    }, "SomeRandomText", {
+    }, process.env.JWT_SECRET!, {
         expiresIn: "30d"
     });
 
     user.token = token;
     return user;
-}
+};

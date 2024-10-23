@@ -26,6 +26,7 @@ import { InputValidationComponent } from './components/input-validation/input-va
 import { OrderItemsListComponent } from './components/order-items-list/order-items-list.component';
 import { MapComponent } from './components/map/map.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
       provide: HTTP_INTERCEPTORS, 
       useClass: LoadingInterceptor,
       multi: true
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

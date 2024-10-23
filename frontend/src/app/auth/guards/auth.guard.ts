@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { map } from 'rxjs/operators';
-import { User } from '../shared/models/User';
+import { User } from '../../shared/models/User';
 
 @Injectable({
   providedIn: 'root'

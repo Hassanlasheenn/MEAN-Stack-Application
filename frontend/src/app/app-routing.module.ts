@@ -4,7 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { FoodPageComponent } from './pages/food-page/food-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './auth/guards/auth.guard';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ResetPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';

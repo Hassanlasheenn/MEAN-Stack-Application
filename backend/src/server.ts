@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import foodRoutes from './routes/foodRoutes';
 import userRoutes from './routes/userRoutes';
+import orderRouter from './routes/orderRoutes';
 import dotenv from 'dotenv';
 import { dbConnect } from './configs/database.config';
 
@@ -12,12 +13,12 @@ const app = express();
 const port = process.env.PORT;
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'development') {
+// if (process.env.NODE_ENV === 'development') {
     app.use(cors({
         credentials: true,
         origin: "http://localhost:4200",
     }));
-}
+// }
 
 function setCorsHeaders(req: Request, res: any, next: any) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,6 +30,7 @@ function setCorsHeaders(req: Request, res: any, next: any) {
 app.use(setCorsHeaders);
 app.use('/api/foods', foodRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRouter);
 
 
 app.listen(port, () => {
