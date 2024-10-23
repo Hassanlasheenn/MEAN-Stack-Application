@@ -19,6 +19,7 @@ export class MapComponent implements OnInit, OnDestroy {
     iconSize: [42, 42],
     iconAnchor: [21, 42],
   });
+  locationIcon: string = '../../../assets/icons/my-location-svgrepo-com.svg';
 
   @ViewChild('map', { static: true })
   mapRef!: ElementRef;
@@ -31,8 +32,6 @@ export class MapComponent implements OnInit, OnDestroy {
     latlng.lat = parseFloat(latlng.lat.toFixed(8));
     latlng.lng = parseFloat(latlng.lng.toFixed(8));
     this.order.addressLatLng = latlng;
-
-    console.log(this.order.addressLatLng);
   }
 
   constructor(
@@ -48,13 +47,13 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.map = map(this.mapRef.nativeElement, {
       attributionControl: false,
-    }).setView(this.DEFAULT_LATLNG, 1);
+    }).setView(this.DEFAULT_LATLNG, 2.5);
 
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
 
     this.map.on('click', (e: LeafletMouseEvent) => {
       this.setMarker(e.latlng);
-    })
+    });
   }
 
   findMyLocation(): void {
