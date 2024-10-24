@@ -17,7 +17,7 @@ RUN npm run build
 FROM node:lts-alpine
 WORKDIR /app
 COPY package.json package-lock.json ./
-COPY src/.env .env
+COPY src/.env.${NODE_ENV} .env
 
 RUN npm ci --production
 

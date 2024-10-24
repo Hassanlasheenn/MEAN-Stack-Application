@@ -17,8 +17,6 @@ services:
       - events_net
     ports:
       - "8080:8080"
-    env_file:
-      - ./backend/src/.env
     environment:
       - NODE_ENV=production
 
