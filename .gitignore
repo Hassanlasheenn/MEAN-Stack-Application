@@ -1,6 +1,7 @@
 # Backend
 /backend/node_modules
-/backend/src/.env
+/backend/src/.env.dev
+/backend/src/.env.prod
 
 # Frontend
 /frontend/node_modules

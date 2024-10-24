@@ -1,0 +1,10 @@
+node_modules
+dist
+.env.dev
+.env.prod
+*.log
+*.tmp
+*.test.ts
+.vscode/
+.idea/
+.DS_Store

@@ -10,20 +10,21 @@ dotenv.config();
 dbConnect();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 app.use(express.json());
 
-// if (process.env.NODE_ENV === 'development') {
-    app.use(cors({
-        credentials: true,
-        origin: "http://localhost:4200",
-    }));
-// }
+const corsOptions = {
+    credentials: true,
+    origin: process.env.NODE_ENV === 'production' ? '*' : "http://localhost:4200",
+}
 
-function setCorsHeaders(req: Request, res: any, next: any) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+app.use(cors(corsOptions));
+
+function setCorsHeaders(req: any, res: any, next: any) {
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    console.log(`Request: ${req.method} ${req.url}`);
     next();
 }
 

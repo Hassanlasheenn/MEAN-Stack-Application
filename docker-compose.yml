@@ -1,0 +1,46 @@
+services:
+  frontend:
+    build: 
+      context: "./frontend"
+      dockerfile: "Dockerfile"
+    networks:
+      - events_net
+    ports:
+      # angular to nginx server on 80
+      - "4200:80"
+  
+  backend:
+    build:
+      context: "./backend"
+      dockerfile: "Dockerfile"
+    networks:
+      - events_net
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/src/.env
+    environment:
+      - NODE_ENV=production
+
+  
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - events_net
+
+  proxy:
+    image: nginx:stable-alpine
+    environment:
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+    volumes:
+      - ${PWD}/nginx.conf:/etc/nginx/templates/nginx.conf
+    ports:
+      - "80:80"
+    networks:
+      - events_net
+
+networks:
+  events_net:
