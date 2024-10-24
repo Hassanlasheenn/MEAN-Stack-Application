@@ -14,7 +14,7 @@ services:
       context: "./backend"
       dockerfile: "Dockerfile"
       args:
-        - NODE_ENV: production
+        NODE_ENV: production
     networks:
       - events_net
     ports:
