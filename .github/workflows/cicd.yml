@@ -34,9 +34,6 @@ jobs:
       - name: Build frontend image
         run: docker build -t hassanlasheen/frontend:latest -f frontend/Dockerfile ./frontend
 
-      - name: List files in src directory
-        run: ls -la ./backend/src
-
       - name: Build backend image
         run: docker build -t hassanlasheen/backend:latest --build-arg NODE_ENV=production -f backend/Dockerfile ./backend
       
@@ -45,19 +42,6 @@ jobs:
 
       - name: Push backend image
         run: docker push hassanlasheen/backend:latest
-
-      # Install Docker Compose
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-
-      # deploy application using docker compose
-      - name: Deploy with Docker Compose
-        env:
-          NODE_ENV: production
-        run: |
-          docker-compose -f docker-compose.yml up -d --pull always
 
   deploy:
     needs: build
