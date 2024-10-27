@@ -46,6 +46,12 @@ jobs:
       - name: Push backend image
         run: docker push hassanlasheen/backend:latest
 
+      # Install Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
       # deploy application using docker compose
       - name: Deploy with Docker Compose
         env:
@@ -71,6 +77,12 @@ jobs:
 
       - name: Pull backend image
         run: docker pull hassanlasheen/backend:latest
+
+      # Ensure Docker Compose is installed on the self-hosted runner if needed
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: Deploy with Docker Compose
         env:
