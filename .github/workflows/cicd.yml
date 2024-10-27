@@ -34,8 +34,6 @@ jobs:
       - name: Build frontend image
         run: docker build -t hassanlasheen/frontend:latest -f frontend/Dockerfile ./frontend
 
-      - name: Copy .env file
-        run: cp ./backend/src/.env.production ./backend/src/.env
 
       - name: Build backend image
         run: docker build -t hassanlasheen/backend:latest --build-arg NODE_ENV=production -f backend/Dockerfile ./backend
