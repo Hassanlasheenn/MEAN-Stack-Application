@@ -3,7 +3,7 @@ name: Deploy MEAN Application
 on:
   push:
     branches:
-     - feature/create-ci-cd-pipeline
+     - main
 
 jobs:
   build:
