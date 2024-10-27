@@ -16,7 +16,7 @@ jobs:
           - 27017:27017
     
     env:
-      NODE_ENV: prod
+      NODE_ENV: production
     
     steps:
       - name: Checkout repository
@@ -34,8 +34,11 @@ jobs:
       - name: Build frontend image
         run: docker build -t hassanlasheen/frontend:latest -f frontend/Dockerfile ./frontend
 
+      - name: Copy .env file
+        run: cp ./backend/src/.env.production ./backend/src/.env
+
       - name: Build backend image
-        run: docker build -t hassanlasheen/backend:latest --build-arg NODE_ENV=prod -f backend/Dockerfile ./backend
+        run: docker build -t hassanlasheen/backend:latest --build-arg NODE_ENV=production -f backend/Dockerfile ./backend
       
       - name: Push frontend image
         run: docker push hassanlasheen/frontend:latest
@@ -46,7 +49,7 @@ jobs:
       # deploy application using docker compose
       - name: Deploy with Docker Compose
         env:
-          NODE_ENV: prod
+          NODE_ENV: production
         run: |
           docker-compose -f docker-compose.yml up -d --pull always
 
@@ -71,7 +74,7 @@ jobs:
 
       - name: Deploy with Docker Compose
         env:
-          NODE_ENV: prod
+          NODE_ENV: production
         run: |
           docker-compose down 
           docker-compose up -d --pull always
