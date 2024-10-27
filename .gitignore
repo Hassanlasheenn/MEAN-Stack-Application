@@ -1,7 +1,5 @@
 # Backend
 /backend/node_modules
-/backend/src/.env.dev
-/backend/src/.env.prod
 /backend/dist/
 
 # Frontend

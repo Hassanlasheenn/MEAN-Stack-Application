@@ -1,0 +1,96 @@
+name: Deploy MEAN Application
+
+on:
+  push:
+    branches:
+     - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+    
+    env:
+      NODE_ENV: production
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build frontend image
+        run: docker build -t hassanlasheen/frontend:latest -f frontend/Dockerfile ./frontend
+
+      - name: List files in src directory
+        run: ls -la ./backend/src
+
+      - name: Build backend image
+        run: docker build -t hassanlasheen/backend:latest --build-arg NODE_ENV=production -f backend/Dockerfile ./backend
+      
+      - name: Push frontend image
+        run: docker push hassanlasheen/frontend:latest
+
+      - name: Push backend image
+        run: docker push hassanlasheen/backend:latest
+
+      # Install Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      # deploy application using docker compose
+      - name: Deploy with Docker Compose
+        env:
+          NODE_ENV: production
+        run: |
+          docker-compose -f docker-compose.yml up -d --pull always
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Pull frontend image
+        run: docker pull hassanlasheen/frontend:latest
+
+      - name: Pull backend image
+        run: docker pull hassanlasheen/backend:latest
+
+      # Ensure Docker Compose is installed on the self-hosted runner if needed
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Deploy with Docker Compose
+        env:
+          NODE_ENV: production
+        run: |
+          docker-compose down 
+          docker-compose up -d --pull always
+
+      - name: Clean up old images
+        run: |
+          docker image prune -f 
