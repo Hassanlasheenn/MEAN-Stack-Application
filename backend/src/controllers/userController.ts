@@ -22,10 +22,10 @@ export const userRegister = asyncHandler(
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = await UserModel.create({
-            name: name,
-            lastName: lastName,
-            address: address,
-            email: email,
+            name,
+            lastName,
+            address,
+            email,
             password: hashedPassword,
             isAdmin: false,
         });

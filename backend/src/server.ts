@@ -10,7 +10,7 @@ dotenv.config();
 dbConnect();
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 app.use(express.json());
 
 const corsOptions = {

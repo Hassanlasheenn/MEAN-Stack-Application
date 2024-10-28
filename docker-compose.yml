@@ -1,30 +1,29 @@
 services:
   frontend:
-    build: 
-      context: "./frontend"
-      dockerfile: "Dockerfile"
+    build:
+      context: './frontend'
+      dockerfile: 'Dockerfile'
     networks:
       - events_net
     ports:
       # angular to nginx server on 80
-      - "4200:80"
-  
+      - '4200:80'
+
   backend:
     build:
-      context: "./backend"
-      dockerfile: "Dockerfile"
+      context: './backend'
+      dockerfile: 'Dockerfile'
       args:
-        NODE_ENV: production
+        NODE_ENV: development
     networks:
       - events_net
     ports:
-      - "8080:8080"
+      - '8080:8080'
 
-  
   db:
     image: mongo:latest
     ports:
-      - "27017:27017"
+      - '27017:27017'
     networks:
       - events_net
 
@@ -36,7 +35,7 @@ services:
     volumes:
       - ${PWD}/nginx.conf:/etc/nginx/templates/nginx.conf
     ports:
-      - "80:80"
+      - '80:80'
     networks:
       - events_net
 
